@@ -49,6 +49,7 @@ export FLASK_APP=app
 flask shell 
 
 
+
 # shell windows
 set FLASK_APP=app
 flask shell 
