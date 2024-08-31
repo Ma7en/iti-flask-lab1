@@ -1,0 +1,30 @@
+{% extends './base.html' %}
+
+<!-- content -->
+{% block content %}
+
+<div class="row">
+    <div class="col-12 col-md-7">
+        <div
+            class="div d-flex flex-column justify-content-center align-items-center h-100 gap-2"
+        >
+            <h1 class="text-capitalize">page not fonud</h1>
+            <a href="{{ url_for('blogs.list')}}" class="btn btn-primary"
+                >Back to all Blogs</a
+            >
+        </div>
+    </div>
+
+    <div class="col-12 col-md-5">
+        <div class="">
+            <img
+                class="w-100"
+                src="{{url_for('static', filename='assets/images/errors/ghost-img.png')}}"
+                alt="not fonud"
+                srcset=""
+            />
+        </div>
+    </div>
+</div>
+
+{% endblock %}

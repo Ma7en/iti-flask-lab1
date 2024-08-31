@@ -1,0 +1,56 @@
+
+# ubuntu
+virtualenv venv
+source venv/bin/activate 
+
+
+
+# create virtual env  windows
+virtualenv wvenv
+wvenv\Scripts\activate
+
+
+
+
+# intall packages 
+pip install flask 
+pip install flask-shell-ipython
+pip install -U Flask-SQLAlchemy
+
+
+
+# ubuntu 
+pip freeze > requirements.txt 
+pip install -r requirements.txt
+
+
+# windows 
+pip freeze > wrequirements.txt 
+pip install -r wrequirements.txt
+
+
+
+# create project
+
+
+# run project ubuntu 
+export FLASK_APP=app
+flask run --debug
+
+
+# run project windows
+set FLASK_APP=app
+flask run --debug
+
+
+
+# shell ubuntu
+export FLASK_APP=app
+flask shell 
+
+
+# shell windows
+set FLASK_APP=app
+flask shell 
+
+
