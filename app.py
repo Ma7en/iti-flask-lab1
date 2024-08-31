@@ -7,11 +7,7 @@ app = Flask(__name__)
 
 
 # start sql
-# windows
-app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_w.db"
-
-# ubuntu
-# app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database_u.db"
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 db = SQLAlchemy(app)
 
 
