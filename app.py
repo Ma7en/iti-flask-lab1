@@ -1,17 +1,18 @@
-from flask import Flask, abort, url_for, request, redirect
+from flask import Flask, url_for, request, redirect
 from flask import render_template
 from flask_sqlalchemy import SQLAlchemy
 
 
 app = Flask(__name__)
 
-
+# =================================================================
 # start sql
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///database.db"
 db = SQLAlchemy(app)
 
 
-# (id, name, description , image)
+# =================================================================
+# *** Model ***
 class Blogs(db.Model):
     __tablename__ = "blogs"
     id = db.Column(db.Integer, primary_key=True)
@@ -30,11 +31,9 @@ class Blogs(db.Model):
     def delete_url(self):
         return url_for("blogs.delete", blog=self.id)
 
-    # @property
-    # def show_url(self):
-    #     return url_for("blogs.show", blog=self.id)
 
-
+# =================================================================
+# *** Route ***
 @app.route("/", endpoint="blogs.list")
 def blogs_list():
     blogs = Blogs.query.all()
@@ -43,7 +42,6 @@ def blogs_list():
 
 @app.route("/blogs/create", endpoint="blogs.create", methods=["GET", "POST"])
 def blogs_create():
-    print(request.method, request.form)
     if request.method == "POST":
         blog = Blogs(
             name=request.form["name"],
@@ -57,17 +55,14 @@ def blogs_create():
     return render_template("blogs/create.html")
 
 
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 
 @app.route("/blogs/<int:blog>/update", endpoint="blogs.update", methods=["GET", "POST"])
 def blogs_update(blog):
     blog = db.get_or_404(Blogs, blog)
     if request.method == "POST":
-        # print("requested blog----------->\n", request.form)
-        # print("-==->", request.POST["name"])
-        # print("-==->", request.form["name"])
         blogobj = blog
         blogobj.name = request.form["name"]
         blogobj.description = request.form["description"]
@@ -98,6 +93,7 @@ def error_not_found(error):
     return render_template("errors/404.html")
 
 
+# =================================================================
 # start server
 if __name__ == "__main__":
     app.run(debug=True)
